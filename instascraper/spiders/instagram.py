@@ -93,8 +93,7 @@ class InstagramSpider(scrapy.Spider):
                     'image_url': image_url,
                     'videoURL': video_url, 'captions': captions[:-1]}
             yield item
-        next_page_bool = data['data']['user']['edge_owner_to_timeline_media']['page_info']['has_next_page']
-        if next_page_bool:
+        if next_page_bool := data['data']['user']['edge_owner_to_timeline_media']['page_info']['has_next_page']:
             cursor = data['data']['user']['edge_owner_to_timeline_media']['page_info']['end_cursor']
             di['after'] = cursor
             params = {'query_hash': 'e769aa130647d2354c40ea6a439bfc08', 'variables': json.dumps(di)}
